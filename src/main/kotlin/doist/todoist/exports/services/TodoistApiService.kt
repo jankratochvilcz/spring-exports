@@ -11,22 +11,23 @@ import org.springframework.web.reactive.function.client.awaitBodyOrNull
 @Component
 class TodoistApiService constructor(val configurationService: ITodoistConfigurationService) : ITodoistApiService {
     override suspend fun getAllItems(): Array<Item> {
-        val configuration = configurationService.getConfiguration()
         val client = getClient()
 
         return client
                 .get()
                 .uri("/tasks")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer ${configuration.todoistToken}")
                 .retrieve()
                 .awaitBodyOrNull() ?: emptyArray<Item>()
     }
 
     private fun getClient(): WebClient {
+        val configuration = configurationService.getConfiguration()
+
         return WebClient.builder().baseUrl("https://api.todoist.com/rest/v1/").exchangeStrategies(
             ExchangeStrategies.builder().codecs {
                 it.defaultCodecs().maxInMemorySize(1000000)
             }.build()
-        ).build()
+        ).defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer ${configuration.todoistToken}")
+            .build()
     }
 }

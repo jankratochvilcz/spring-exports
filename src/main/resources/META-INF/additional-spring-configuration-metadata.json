@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "airtable.app-id",
+      "type": "java.lang.String",
+      "description": "The base ID"
+    },
+    {
+      "name": "airtable.token",
+      "type": "java.lang.String",
+      "description": "Airtable personal token"
+    },
+    {
+      "name": "todoist.token",
+      "type": "java.lang.String",
+      "description": "Todoist personal auth token"
+    }
+  ] }
