@@ -14,8 +14,6 @@ data class AirTableListResponse (val records: Array<AirTableListRecord>)
 
 data class AirTableListRecord (val id: String)
 
-data class AirTableRow (val id: String, val content: String)
-
 data class AirTableRowInsertRequest(val fields: Map<String, String>)
 
 @Component

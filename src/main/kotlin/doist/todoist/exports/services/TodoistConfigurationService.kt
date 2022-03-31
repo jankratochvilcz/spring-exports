@@ -1,11 +1,12 @@
 package doist.todoist.exports.services
 
 import doist.todoist.exports.entities.TodoistConfiguration
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
-class TodoistConfigurationService : ITodoistConfigurationService {
+class TodoistConfigurationService constructor(@Value("\${todoist.token}") val token: String) : ITodoistConfigurationService {
     override fun getConfiguration(): TodoistConfiguration {
-        return TodoistConfiguration(todoistToken = "4fa251b9adc0f520e227b26b6691092bf6f54062")
+        return TodoistConfiguration(todoistToken = token)
     }
 }
